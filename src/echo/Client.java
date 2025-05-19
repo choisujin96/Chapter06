@@ -25,7 +25,7 @@ public class Client {
 		//서버에 연결
 		System.out.println("[서버에 연결을 요청합니다.]");
 		
-		socket.connect(new InetSocketAddress("192.168.0.96", 10001));	
+		socket.connect(new InetSocketAddress("192.168.0.35", 10001));	
 		
 		// 쓰기 스트림
 		//OutputStream out = new FileOutputStream("C:\\javaStudy\\MS949-copy.txt");
@@ -42,13 +42,20 @@ public class Client {
 		
 		//스캐너 준비
 		Scanner sc = new Scanner(System.in);
-	
+          
+		/*
+		InputStream sin = System.in;   //주스트림 
+		InputStreamReader sisr = new InputStreamReader(sin, "Ms949");
+		BufferedReader sbr = new BufferedReader(sisr); 
+		*/
+		
 		
 		//------------------------------------
 		
 		while(true) {
 			//메세지 키보드로 입력받기
-			String msg = sc.nextLine(); //입력대기
+			String msg = sc.nextLine();
+			//String msg = sbr.readLine(); //입력대기
 				
 			if("/q".equals(msg)) { //종료조건
 				break;
@@ -62,15 +69,28 @@ public class Client {
 			
 			//메세지를 받는다.
 			String reMsg = br.readLine();
-			System.out.println("server:[" + reMsg + "]");			
+			System.out.println("[server]:" + reMsg );			
 			
 		}
 		
 		System.out.println("======================================");
-		System.out.println("<클라이언트 종료>");
+		//System.out.println("<클라이언트 종료>");
+		
+		//println 스트림
+		OutputStream pout = System.out;
+		OutputStreamWriter posw = new OutputStreamWriter(pout,"MS949");
+		BufferedWriter pbw = new BufferedWriter(posw);
+		
+		pbw.write("<클라이언트 종료>");
+		pbw.newLine();
+		pbw.flush();
+		
+		
 		
 		//닫기
-		sc.close();
+		sc.close();	
+		//sbr.close();
+		pbw.close();
 		bw.close();
 		br.close();
 		socket.close();

@@ -58,7 +58,7 @@ public class Server {
 			 
 			 //-->메세지를 받는다.
 			 String msg = br.readLine();
-			 System.out.println("받은메세지: " +  msg);
+			 System.out.println("받은 메세지: " +  msg);
 			 
 			 if(msg == null) {// /q가 나오면서 죽은메세지를 받으면 끝낸다.				 
 				 break;
